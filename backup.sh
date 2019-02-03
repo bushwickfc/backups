@@ -11,4 +11,4 @@ if [ "$db" = "pos" ]; then
   args="--tables $tables"
 fi
 
-mysqldump -u $user -p"$pass" -h $host $db $args | bzip2 > $backup
+mysqldump -u $user -p "$pass" -h $host $db $args | bzip2 > $backup
