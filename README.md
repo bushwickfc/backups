@@ -51,3 +51,10 @@ python3 pg-test.py $oauth_token
 ## cp-backup.sh
 
 **cp-backup.sh** goes on Open Cirtuals
+
+## To-Do
+
+- merge pg-test.sh logic with backup.sh
+- get OAuth token for bushwickfc user
+- deploy to server and test
+- add cron job for the new pg data
