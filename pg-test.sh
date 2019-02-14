@@ -10,11 +10,8 @@ then
 	user=${2:?Missing user}
 	pass=${3:?Missing pass}
 	host=${4:-pos.bushwickfoodcoop.org}
-
-	if [ "$db" = "pos" ]; then
-	  tables=$(mysqlshow -u $user -p"$pass" -h $host $db \* | grep [A-Z][A-Z] | sed 's/[^_A-Z]//g')
-	  args="--tables $tables"
-	fi
+	tables=$(mysqlshow -u $user -p"$pass" -h $host $db \* | grep [A-Z][A-Z] | sed 's/[^_A-Z]//g')
+	args="--tables $tables"
 
 	mysqldump -u $user -p"$pass" -h $host $db $args | bzip2 > $backup
 else
