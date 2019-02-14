@@ -4,13 +4,13 @@ Backup scripts for various databases.
 
 ## backup.sh
 
-**backup.sh** is hosted on Mayfirst, and it is used to back up the BFC's `pos` and `owners_db` databases, which are MySQL and PostgreSQL, respectively.
+**backup.sh** is hosted on Mayfirst, and it is used to back up the BFC's **pos** and **owners_db** databases, which are MySQL and Postgres, respectively.
 
-It is currently deployed at `/home/members/bfc/sites/db.bushwickfoodcoop.org/users/dbbwickfood/backup.sh` and writes backups to `/home/members/bfc/sites/db.bushwickfoodcoop.org/users/dbbwickfood/backups/$db.bz2`.
+The script is currently deployed at `/home/members/bfc/sites/db.bushwickfoodcoop.org/users/dbbwickfood/backup.sh` and writes backups to `/home/members/bfc/sites/db.bushwickfoodcoop.org/users/dbbwickfood/backups/$db.bz2`.
 
 The backup is set to run as a cronjob by the user `dbbwick` daily at midnight with the following crontab command:
 
-```
+```crontab
 0 0 * * * /home/members/bfc/sites/db.bushwickfoodcoop.org/users/dbbwickfood/backup.sh pos $user $password
 0 0 * * * /home/members/bfc/sites/db.bushwickfoodcoop.org/users/dbbwickfood/backup.sh owners_db $oauth_token
 ```
@@ -19,9 +19,9 @@ The backup is set to run as a cronjob by the user `dbbwick` daily at midnight wi
 
 The **pos** MySQL database is currently running on an AWS instance. To run the cronjob above, you'll need to provide values for the `$user` and `$password` arguments.
 
-### owners_db - WORK IN PROGRESS
+### owners_db
 
-The **owners_db** Postgres database is currently running on Heroku. Heroku periodically rotates DB credentials, and so the first part of the backup script retrieves those credentials from Heroku. In order to access the credentials via Heroku's platform API, the request will need to include an OAuth token associated with an account that has access to the database; thus, you'll need to provide a value for the `$oauth_token` argument.
+The **owners_db** Postgres database is currently running on Heroku. Heroku periodically rotates DB credentials, and so the first part of the backup script retrieves the latest configuration from Heroku and extracts the db connection string. In order to access the credentials via Heroku's platform API, the request will need to include an OAuth token associated with an account that has access to the database; thus, you'll need to provide a value for the `$oauth_token` argument in the cronjob.
 
 To generate an OAuth token via the Heroku CLI, see https://devcenter.heroku.com/articles/platform-api-quickstart
 
@@ -41,11 +41,10 @@ will show the info for that token.
 
 ## cp-backup.sh
 
-**cp-backup.sh** goes on Open Cirtuals
+As of 2/14/19, this script does not appear to be in use.
 
-## To-Do
+**cp-backup.sh** goes on Open Cirtuals.
 
-- merge pg-test.sh logic with backup.sh
-- get OAuth token for bushwickfc user
-- deploy to server and test
-- add cron job for the new pg data
+## members-backups.sh
+
+As of 2/14/19, this script does not appear to be in use.
